@@ -1,39 +1,38 @@
 const fs = require('fs'); // Module pour manipuler les fichiers
-const path = require('patch'); // Module pour gérer les chemins de fichiers
+const path = require('path'); // Module pour gérer les chemins de fichiers
 
-const dowloadsFolder = path.join(process.env.HOME, 'Téléchargements'); // Chemin vers le dossier téléchargements
-const desktopFolder = path.join(process.env.HOME, 'Bureau'); // Chemin vers le bureau
+// Chemins importants
+const downloadsFolder = path.join(process.env.HOME, 'Downloads'); // Chemin vers le dossier Téléchargements
+const desktopFolder = path.join(process.env.HOME, 'Desktop'); // Chemin vers le Bureau
 
 // Dictionnaire des extensions et dossiers cibles
 const fileTypes = {
-  images: ['jpg', 'jpeg', 'png', 'gif'], 
-  documents: ['pdf', 'doc', 'docx', 'txt'], 
-  videos: ['mp4', 'mkv', 'avi'], 
-  music: ['mp3', 'wav', 'flac'], 
-}
+  images: ['jpg', 'jpeg', 'png', 'gif'],
+  documents: ['pdf', 'doc', 'docx', 'txt'],
+  videos: ['mp4', 'mkv', 'avi'],
+  music: ['mp3', 'wav', 'flac'],
+};
 
-// Fonction pour obtenir l'extension d'un fichier 
-
-const getFilType = (filename) => {
-  const ext = path.extname(filename).slice(1).toLowerCase(); // transforme .jpg en jpg 
+// Fonction pour obtenir l'extension d'un fichier
+const getFileType = (filename) => {
+  const ext = path.extname(filename).slice(1).toLowerCase(); // Ex : ".jpg" devient "jpg"
   for (const [type, extensions] of Object.entries(fileTypes)) {
-    if (extensions.includes(ext)) return type; 
+    if (extensions.includes(ext)) return type;
   }
-  return 'others'; // Fichiers qui ne rentrent pas dans les catégories 
-}
+  return 'others'; // Fichiers qui ne rentrent pas dans les catégories
+};
 
-// Fonction pour déplacer un fichier 
-
-constmoveFile = (filePath, type) => {
-  const targetFolder = path.join(desktopFolder, type); 
+// Fonction pour déplacer un fichier
+const moveFile = (filePath, type) => {
+  const targetFolder = path.join(desktopFolder, type); // Ex : /Desktop/images
   if (!fs.existsSync(targetFolder)) {
-    fs.mkdirSync(targetFolder); // Créer le dossier cible s'il n'éxiste pas 
+    fs.mkdirSync(targetFolder); // Crée le dossier cible s'il n'existe pas
   }
 
-  const targetPath = path.join(targetFolder, path.basename(filePath)); // Créer un nouveau chemin 
-  fs.renameSync(filePath, targetPath); // Déplace le fichier 
+  const targetPath = path.join(targetFolder, path.basename(filePath)); // Nouveau chemin
+  fs.renameSync(filePath, targetPath); // Déplace le fichier
   console.log(`Moved ${filePath} to ${targetPath}`);
-}; 
+};
 
 // Fonction principale
 const organizeDownloads = () => {
