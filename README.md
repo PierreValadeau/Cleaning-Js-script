@@ -47,8 +47,6 @@ Ce projet est un script **Node.js** conçu spécifiquement pour les utilisateurs
 Exécution ponctuelle 
 Pour exécuter le script immédiatement, tapez: 
  ```bash 
- node index.js
- 
-Planification automatique
-Le script est configuré pour s'exécuter automatiquement chaque dimanche à 2h00 grâce à la bibliothèque node-schedule.
-Pour activer cette fonctionnalité, laissez le script tourner en arrière-plan :
+ node index.js 
+
+
