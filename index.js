@@ -21,3 +21,16 @@ const getFilType = (filename) => {
   }
   return 'others'; // Fichiers qui ne rentrent pas dans les catégories 
 }
+
+// Fonction pour déplacer un fichier 
+
+constmoveFile = (filePath, type) => {
+  const targetFolder = path.join(desktopFolder, type); 
+  if (!fs.existsSync(targetFolder)) {
+    fs.mkdirSync(targetFolder); // Créer le dossier cible s'il n'éxiste pas 
+  }
+
+  const targetPath = path.join(targetFolder, path.basename(filePath)); // Créer un nouveau chemin 
+  fs.renameSync(filePath, targetPath); // Déplace le fichier 
+  console.log(`Moved ${filePath} to ${targetPath}`);
+}
