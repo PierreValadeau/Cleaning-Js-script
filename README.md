@@ -3,6 +3,7 @@
 ## 📋 Description
 
 Ce projet est un script **Node.js** qui organise automatiquement les fichiers de votre dossier **Téléchargements** (`Downloads`) en les déplaçant dans des dossiers spécifiques sur votre **Bureau** (`Desktop`).  
+
 Par exemple :
 - Les images (`.jpg`, `.png`, etc.) seront déplacées dans un dossier `/Bureau/images`.
 - Les documents (`.pdf`, `.docx`, etc.) iront dans `/Bureau/documents`.

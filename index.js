@@ -1,3 +1,4 @@
+const schedule = require('node-schedule');
 const fs = require('fs'); // Module pour manipuler les fichiers
 const path = require('path'); // Module pour gérer les chemins de fichiers
 
@@ -57,6 +58,13 @@ const organizeDownloads = () => {
     console.log('Organizing completed!');
   });
 };
+// Planification : Exécuter le script chaque dimanche à 2h00
+schedule.scheduleJob({ hour: 2, minute: 0, dayOfWeek: 0 }, () => {
+  console.log('Scheduled task running...');
+  organizeDownloads();
+});
+
+console.log('Scheduler initialized. Waiting for the next run...');
 
 // Exécute la fonction principale
 organizeDownloads();
