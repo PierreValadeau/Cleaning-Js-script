@@ -33,4 +33,31 @@ constmoveFile = (filePath, type) => {
   const targetPath = path.join(targetFolder, path.basename(filePath)); // Créer un nouveau chemin 
   fs.renameSync(filePath, targetPath); // Déplace le fichier 
   console.log(`Moved ${filePath} to ${targetPath}`);
-}
+}; 
+
+// Fonction principale
+const organizeDownloads = () => {
+  console.log(`Scanning folder: ${downloadsFolder}`);
+
+  fs.readdir(downloadsFolder, (err, files) => {
+    if (err) {
+      console.error(`Error reading folder: ${err.message}`);
+      return;
+    }
+
+    files.forEach((file) => {
+      const filePath = path.join(downloadsFolder, file);
+
+      // Vérifie si c'est un fichier (et non un dossier)
+      if (fs.lstatSync(filePath).isFile()) {
+        const type = getFileType(file);
+        moveFile(filePath, type);
+      }
+    });
+
+    console.log('Organizing completed!');
+  });
+};
+
+// Exécute la fonction principale
+organizeDownloads();
